@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/Holgermueller/Mongo_News_App/issues"
   },
-  "homepage": "https://github.com/Holgermueller/Mongo_News_App#readme"
+  "homepage": "https://github.com/Holgermueller/Mongo_News_App#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.1.5",
+    "nodemon": "^1.17.5",
+    "request": "^2.87.0"
+  }
 }
