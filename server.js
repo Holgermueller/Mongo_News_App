@@ -31,6 +31,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 //set up routes
+//route to scrape articles
+
+//route to get one article
+
+//route to add note
+
+//
 
 
 //start server
