@@ -27,7 +27,11 @@ app.set('view engine', 'handlebars');
 //mongoose.connect('mongod://localhost')
 
 //scrapers
+const axios = require('axios');
 const cheerio = require('cheerio');
+
+//set up routes
+
 
 //start server
 app.listen(PORT, function(){
