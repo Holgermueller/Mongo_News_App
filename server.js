@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-//const db = require('./models');
+const db = require('./models');
 
 //create port
 const app = express();
@@ -24,13 +24,18 @@ app.engine('handdlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //mongoose
-//mongoose.connect('mongod://localhost')
+//mongoose.connect('mongod://localhost/ArticleScraper');
 
 //scrapers
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 //set up routes
+//route to display app
+app.get('/', function(req, res){
+    res.send('index')
+});
+
 //route to scrape articles
 
 //route to get one article
