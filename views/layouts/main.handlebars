@@ -12,16 +12,17 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="app-name">MNN</h1>
-        <h2 class="catch-phrase">Mongo New Network</h2>
-        <h3 class="motto">All the news you need, sort of.</h3>
-    </header>
 
-    <div class="banner">
-        <button class="scrape" id="scrape">scrape</button>
-    </div>
-    {{{body}}}
+    {{>nav/nav}}
+
+    <main>
+        <div class="container">
+            {{{body}}}
+        </div>
+    </main>
+
+    {{>footer}}
+
     <!--scripts-->
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
