@@ -15,11 +15,11 @@ app.use(express.static('public'));
 app.use(logger('dev'));
 
 //bodyparser
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //handlbars
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //mongoose
@@ -32,6 +32,6 @@ app.use('/', routes);
 
 
 //start server
-app.listen(PORT, function(){
-    console.log('server listening on localhost: ' + PORT);
+app.listen(PORT, function () {
+	console.log('server listening on localhost: ' + PORT);
 })
