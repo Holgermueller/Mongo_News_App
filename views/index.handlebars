@@ -1,9 +1,20 @@
-<div class="body-div">
-    <h2 class="body-header">
-        Read All About It!
-    </h2>
+<div>
+    <h1>MNN, the most-trusted name in news scraping.</h1>
+    <div>
+        <div></div>
+        <h4>Scrape</h4>
+    </div>
+</div>
 
-    <ul>
-        {{#each article as |article|}}
-    </ul>
+<div>
+    <div></div>
+    <div>
+        {{#each article}}
+        <div class="card-panel">
+            <h3>{{this.title}}</h3>
+            {{!--goes to article.handlebars--}}
+    <a href="/readArticle/{{this._id}}" class="waves-effect" id="btnSignUp">Read It</a>
+        </div>
+        {{/each}}
+    </div>
 </div>
