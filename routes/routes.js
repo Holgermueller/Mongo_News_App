@@ -4,7 +4,7 @@ module.exports = function (app) {
 
     //GET route for index
     app.get('/', function (req, res) {
-        db.Article.find({}).then(function (dbArticle) {
+        db.Article.find({}).then(dbArticle => {
             let hbsObject = {
                 article: dbArticle
             };
@@ -18,21 +18,21 @@ module.exports = function (app) {
 
     //test scrape
     app.get("/scrape", function (req, res) {
-        axios.get("http://www.wired.com/category/science/").then(function (response) {
-            let $ = cheerio.load(response.data);
+        axios.get("http://www.wired.com/").then((response) => {
+            const $ = cheerio.load(response.data);
+            const result = {};
             $(".card-component__description").each(function (i, element) {
-                let result = {};
-                result.headline = $(this).text();
+                result.headline = $(element).text();
                 result.summary = $(this).text();
                 result.link = $(this).children('a').attr('href');
-                console.log(result);
+                console.log(result.headline);
+                console.log(result.link);
+                console.log(result.summary);
 
                 db.Article.create(result)
-                    .then(function (dbArticle) {
-                        console.log(dbArticle);
-                    }).catch(function (err) {
-                        return res.json(err);
-                    });
+                    .then((dbArticle) => {
+                        //console.log(dbArticle);
+                    }).catch(err => { res.json(err) });
             });
             res.send("Scrape complete");
         });
