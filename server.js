@@ -23,15 +23,40 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //mongoose
-//mongoose.connect('mongod://localhost/ArticleScraper');
+mongoose.connect('mongodb://localhost/ArticleScraper');
 //mongoose.connect('mongod://herokustuff');
 
-//set up routes
-const routes = require('./routes/routes.js');
-app.use('/', routes);
+const db = require('./models');
+
+//Routes for scraper
+
+    //GET route for index
+    app.get('/', function (req, res) {
+        db.Article.find({}).then(function (dbArticle) {
+            let hbsObject = {
+                article: dbArticle
+            };
+            res.render('index');
+        });
+    });
+
+    //route to scrape articles
+//scrapers
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+    //route to get one article
+
+    //route to delete article
+
+    //route to display comments
+
+    //route to add comment
+
+    //route to delete comment
 
 
 //start server
 app.listen(PORT, function () {
 	console.log('server listening on localhost: ' + PORT);
-})
+});
