@@ -34,7 +34,20 @@ module.exports = function (app) {
                         //console.log(dbArticle);
                     }).catch(err => { res.json(err) });
             });
-            res.send("Scrape complete");
+            res.redirect("/");
+        });
+    });
+
+    //route to display articles
+    app.get('/scrape', (req, res) => {
+        db.Article.find().sort({_id: -1})
+        .exec((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let artcl = {article: doc};
+                res.render('index', artcl);
+            }
         });
     });
 

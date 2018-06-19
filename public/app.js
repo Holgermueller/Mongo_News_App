@@ -3,7 +3,7 @@
 $(() => {
 
     //function for scraping articles
-    $('')
+
 
     //function for saving articles
 

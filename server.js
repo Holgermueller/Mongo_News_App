@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080
 
 //import public folder
-app.use(express.static('public'));
+app.use(express.static(__dirname + "public"));
 
 //use morgan
 app.use(logger('dev'));
