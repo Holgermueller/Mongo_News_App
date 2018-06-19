@@ -26,35 +26,8 @@ app.set('view engine', 'handlebars');
 mongoose.connect('mongodb://localhost/ArticleScraper');
 //mongoose.connect('mongod://herokustuff');
 
-const db = require('./models');
-
-//Routes for scraper
-
-    //GET route for index
-    app.get('/', function (req, res) {
-        db.Article.find({}).then(function (dbArticle) {
-            let hbsObject = {
-                article: dbArticle
-            };
-            res.render('index');
-        });
-    });
-
-    //route to scrape articles
-//scrapers
-const axios = require('axios');
-const cheerio = require('cheerio');
-
-    //route to get one article
-
-    //route to delete article
-
-    //route to display comments
-
-    //route to add comment
-
-    //route to delete comment
-
+//routes
+require("./routes/routes.js")(app);
 
 //start server
 app.listen(PORT, function () {
