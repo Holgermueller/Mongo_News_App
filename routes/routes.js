@@ -16,7 +16,7 @@ module.exports = function (app) {
     const axios = require('axios');
     const cheerio = require('cheerio');
 
-    //test scrape
+    //route to scrape articles
     app.get("/scrape", function (req, res) {
         axios.get("http://www.wired.com/").then((response) => {
             const $ = cheerio.load(response.data);
@@ -37,9 +37,6 @@ module.exports = function (app) {
             res.send("Scrape complete");
         });
     });
-
-    //route to scrape articles
-
 
     //route to get one article
 
