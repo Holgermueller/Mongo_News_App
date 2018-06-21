@@ -48,7 +48,16 @@ module.exports = (app) => {
         });
     });
 
-    //route to get one article
+    //route to get one article, to read it
+    app.get("/readArticle/:id", (req, res) => {
+        db.Article.findOne({_id: req.params.id})
+        .populate('comments')
+        .exec((err, doc) => {
+            console.log(doc);
+            articleObject = {articles: doc};
+            res.render('article', articleObject);
+        });
+    });
 
     //route to delete article
 
