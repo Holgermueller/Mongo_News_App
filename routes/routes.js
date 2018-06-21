@@ -1,10 +1,9 @@
 const db = require('../models');
-//const Article = require('../models/Article.js')
 
 module.exports = (app) => {
 
     //GET route for index
-    app.get('/', function (req, res) {
+    app.get('/', (req, res) => {
         res.render('index');
     });
 
@@ -21,7 +20,6 @@ module.exports = (app) => {
                 result.headline = $(this).text();
                 result.link = $(this).children('a').attr('href');
                 // console.log(result.headline);
-                // console.log(result.summary);
                 // console.log(result.link);
 
                 db.Article.create(result)
@@ -33,15 +31,12 @@ module.exports = (app) => {
 
     //route to display articles
     app.get('/articles', (req, res) => {
-        db.Article.find({}).sort({_id: -1}).exec((err, dbArticle) => {
-            if(err) {
+        db.Article.find({}).then((err, dbArticle) => {
+            if (err) {
                 console.log(err);
             } else {
-                const hbsObject = {
-                    article: dbArticle
-                };
+                const hbsObject = { articles: dbArticle };
                 res.render('index', hbsObject);
-                console.log(hbsObject);
             };
         });
     });
@@ -54,8 +49,8 @@ module.exports = (app) => {
             } else {
                 res.json(doc);
             }
-        })
-    })
+        });
+    });
 
     //route to get one article
 
