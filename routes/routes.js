@@ -64,17 +64,25 @@ module.exports = (app) => {
             });
     });
 
+    //route to add comment
+    app.post("/comment", (req, res) => {
+        db.Comment.create(req.body)
+            .then((dbComment) => {
+                db.Article.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+            }).catch(err => { res.json(err) });
+    });
+
     //route to display comments
 
-    //route to add comment
+
 
     //route to delete comment
 
     //route to delete article
     app.get("/deleteArticle/:id", (req, res) => {
-        db.Article.deleteOne({ _id: req.params.id})
+        db.Article.deleteOne({ _id: req.params.id })
             .then(dbArticle => {
-                res.json(dbArticle);
+                res.redirect("/articles");
             }).catch(err => {
                 res.json(err);
             });
