@@ -37,7 +37,7 @@ module.exports = (app) => {
             } else {
                 let hbsObject = { articles: data };
                 res.render('index', hbsObject);
-                console.log(hbsObject);
+                //console.log(hbsObject);
             };
         });
     });
@@ -51,18 +51,18 @@ module.exports = (app) => {
                 res.json(doc);
             }
         });
-});
+    });
 
-//route to get one article, to read it
-app.get("/readArticle/:id", (req, res) => {
-    db.Article.findOne({ _id: req.params.id })
-        .populate('comments')
-        .exec((err, doc) => {
-            console.log(doc);
-            articleObject = { articles: doc };
-            res.render('article', articleObject);
-        });
-});
+    //route to get one article, to read it
+    app.get("/readArticle/:id", (req, res) => {
+        db.Article.findOne({ _id: req.params.id })
+            .populate('comments')
+            .exec((err, doc) => {
+                console.log(doc);
+                articleObject = { articles: doc };
+                res.render('article', articleObject);
+            });
+    });
 
     //route to display comments
 
@@ -71,5 +71,13 @@ app.get("/readArticle/:id", (req, res) => {
     //route to delete comment
 
     //route to delete article
+    app.get("/deleteArticle/:id", (req, res) => {
+        db.Article.deleteOne({ _id: req.params.id})
+            .then(dbArticle => {
+                res.json(dbArticle);
+            }).catch(err => {
+                res.json(err);
+            });
+    });
 
 };
