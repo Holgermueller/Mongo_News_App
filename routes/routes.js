@@ -25,39 +25,44 @@ module.exports = (app) => {
                 db.Article.create(result)
                     .then((dbArticle) => { }).catch(err => { res.json(err) });
             });
-            res.redirect("/");
+            res.redirect("/articles");
         });
     });
 
     //route to display articles
-    app.get('/articles', function (req, res) {
-        db.Article.find({}).then(dbArticle => {
-            hbsObject = { articles: dbArticle };
-            res.render('index', hbsObject);
+    app.get('/articles', (req, res) => {
+        db.Article.find({}, (err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let hbsObject = { articles: data };
+                res.render('index', hbsObject);
+                console.log(hbsObject);
+            };
         });
     });
 
     //get articles into JSON
     app.get("/articles-json", (req, res) => {
-        db.Article.find({}, (err, doc) => {
+        db.Article.find({}).then((err, doc) => {
             if (err) {
                 console.log(err);
             } else {
                 res.json(doc);
             }
         });
-    });
+});
 
-    //route to get one article, to read it
-    app.get("/readArticle/:id", (req, res) => {
-        db.Article.findOne({ _id: req.params.id })
-            .populate('comments')
-            .exec((err, doc) => {
-                console.log(doc);
-                articleObject = { articles: doc };
-                res.render('article', articleObject);
-            });
-    });
+//route to get one article, to read it
+app.get("/readArticle/:id", (req, res) => {
+    db.Article.findOne({ _id: req.params.id })
+        .populate('comments')
+        .exec((err, doc) => {
+            console.log(doc);
+            articleObject = { articles: doc };
+            res.render('article', articleObject);
+        });
+});
 
     //route to display comments
 
