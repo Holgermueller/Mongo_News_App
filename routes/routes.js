@@ -31,13 +31,9 @@ module.exports = (app) => {
 
     //route to display articles
     app.get('/articles', (req, res) => {
-        db.Article.find({}).then((err, dbArticle) => {
-            if (err) {
-                console.log(err);
-            } else {
-                const hbsObject = { articles: dbArticle };
+        db.Article.find({}).then((dbArticle) => {
+                hbsObject = { articles: dbArticle };
                 res.render('index', hbsObject);
-            };
         });
     });
 
