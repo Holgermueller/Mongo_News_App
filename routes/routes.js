@@ -30,16 +30,16 @@ module.exports = (app) => {
     });
 
     //route to display articles
-    app.get('/articles', (req, res) => {
-        db.Article.find({}).then((dbArticle) => {
-                hbsObject = { articles: dbArticle };
-                res.render('index', hbsObject);
+    app.get('/articles', function (req, res) {
+        db.Article.find({}).then(dbArticle => {
+            hbsObject = { articles: dbArticle };
+            res.render('index', hbsObject);
         });
     });
 
     //get articles into JSON
     app.get("/articles-json", (req, res) => {
-        db.Article.find({}, function (err, doc) {
+        db.Article.find({}, (err, doc) => {
             if (err) {
                 console.log(err);
             } else {
@@ -50,21 +50,21 @@ module.exports = (app) => {
 
     //route to get one article, to read it
     app.get("/readArticle/:id", (req, res) => {
-        db.Article.findOne({_id: req.params.id})
-        .populate('comments')
-        .exec((err, doc) => {
-            console.log(doc);
-            articleObject = {articles: doc};
-            res.render('article', articleObject);
-        });
+        db.Article.findOne({ _id: req.params.id })
+            .populate('comments')
+            .exec((err, doc) => {
+                console.log(doc);
+                articleObject = { articles: doc };
+                res.render('article', articleObject);
+            });
     });
-
-    //route to delete article
 
     //route to display comments
 
     //route to add comment
 
     //route to delete comment
+
+    //route to delete article
 
 };
