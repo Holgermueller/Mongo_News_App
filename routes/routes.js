@@ -64,11 +64,16 @@ module.exports = (app) => {
             });
     });
 
+    //route to save article
+
+
     //route to add comment
     app.post("/comment", (req, res) => {
         db.Comment.create(req.body)
             .then((dbComment) => {
-                db.Article.findOneAndUpdate({}, { $push: { comment: dbComment._id } }, { new: true });
+                db.Article.findOneAndUpdate({}, 
+                    { $push: { name, comment} }, 
+                    { new: true });
             }).catch(err => { res.json(err) });
     });
 

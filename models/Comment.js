@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let CommentSchema = new Schema({
-    title: String,
-    body: String
+    name: String,
+    comment: String
 });
 
 let Comment = mongoose.model('Comment', CommentSchema);
