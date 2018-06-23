@@ -70,9 +70,9 @@ module.exports = (app) => {
 
 
     //route to add comment to an article
-    app.post("/readArticle/:id", (req, res) => {
+    app.post("/comment", (req, res) => {
         db.Comment.create(req.body).then(dbComment => {
-            db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {comment: dbComment._id }}, { new: true });
+            db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });
         }).then(dbArticle => {
             res.json(dbArticle);
             console.log(dbArticle);
@@ -82,6 +82,7 @@ module.exports = (app) => {
     });
 
     //route to delete comment
+
 
     //route to delete article
     app.get("/deleteArticle/:id", (req, res) => {

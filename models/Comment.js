@@ -3,8 +3,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let CommentSchema = new Schema({
-    name: String,
-    comment: String
+    name: {
+        type: String
+    },
+    comment: {
+        type: String
+    }
 });
 
 let Comment = mongoose.model('Comment', CommentSchema);
