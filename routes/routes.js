@@ -56,30 +56,30 @@ module.exports = (app) => {
     //route to get one article, to read it
     app.get("/readArticle/:id", (req, res) => {
         db.Article.findOne({ _id: req.params.id })
-            .populate('comments')
-            .exec((err, doc) => {
-                console.log(doc);
-                articleObject = { articles: doc };
+            .populate('comment')
+            .then(dbArticle => {
+                //console.log(dbArticle);
+                articleObject = { articles: dbArticle };
                 res.render('article', articleObject);
+            }).catch(err => {
+                res.json(err);
             });
     });
 
     //route to save article
 
 
-    //route to add comment
-    app.post("/comment", (req, res) => {
-        db.Comment.create(req.body)
-            .then((dbComment) => {
-                db.Article.findOneAndUpdate({}, 
-                    { $push: { name, comment} }, 
-                    { new: true });
-            }).catch(err => { res.json(err) });
+    //route to add comment to an article
+    app.post("/readArticle/:id", (req, res) => {
+        db.Comment.create(req.body).then(dbComment => {
+            db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {comment: dbComment._id }}, { new: true });
+        }).then(dbArticle => {
+            res.json(dbArticle);
+            console.log(dbArticle);
+        }).catch(err => {
+            res.json(err);
+        });
     });
-
-    //route to display comments
-
-
 
     //route to delete comment
 
