@@ -74,8 +74,8 @@ module.exports = (app) => {
         db.Comment.create(req.body).then(dbComment => {
             db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { comment: dbComment._id } }, { new: true });
         }).then(dbArticle => {
-            res.json(dbArticle);
-            console.log(dbArticle);
+            articleObject = { articles: dbArticle };
+            res.redirect('/readArticle/:id');
         }).catch(err => {
             res.json(err);
         });
